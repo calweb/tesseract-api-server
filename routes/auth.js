@@ -64,7 +64,7 @@ router.route('/login')
         displayName: req.body.displayName,
         email: req.body.email,
         password: req.body.password,
-        role: /@theironyard.com\s*$/.test(req.body.email) ? 'admin' : 'student'
+        role: /@theironyard.com\s*$/.test(req.body.email) ? 'admin' : 'player'
       });
       user.save(function() {
         res.send({ token: createToken(user), role: user.role });
