@@ -33,6 +33,7 @@ function createToken(user) {
 router.route('/login')
   .post(function(req, res, next) {
     User.findOne({ email: req.body.email }, '+password', function(err, user, next) {
+
       if (err) return next(err);
       if (!user) {
         return res.status(401).send({ message: 'Wrong email and/or password' });
@@ -41,6 +42,7 @@ router.route('/login')
         if (!isMatch) {
           return res.status(401).send({ message: 'Wrong email and/or password' });
         }
+        console.log("here's the user!!", user);
         res.send({ token: createToken(user), role: user.role });
       });
     });
