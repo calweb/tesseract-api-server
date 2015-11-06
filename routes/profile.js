@@ -96,7 +96,7 @@ router.route('/admin/users/:userId')
 
     });
 
-  router.route('/me/decks/deckId')
+  router.route('/me/decks/:deckId')
     .all(ensureAuthenticated, role.can('access player resources'))
     .get(function (req, res ) {
       Deck.findById(req.params.deckId, function (err, deck ) {
