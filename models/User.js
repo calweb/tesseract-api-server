@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
   google: String,
   github: String,
   profile: {
-    course: {type: mongoose.Schema.ObjectId, ref: 'Courses'},
+    course: {type: mongoose.Schema.ObjectId, ref: 'Course'},
     cohort: String,
     company: {
       companyInfo: {type: mongoose.Schema.ObjectId, ref: 'Company'},
