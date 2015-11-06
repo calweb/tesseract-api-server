@@ -76,7 +76,7 @@ router.route('/admin/users/:userId')
   router.route('/me/decks')
     .all(ensureAuthenticated, role.can('access player resources'))
     .get(function (req, res) {
-      Deck.find({}, function (err, decks) {
+      Deck.find({user: req.user }, function (err, decks) {
         if (err) { return res.status(400).send({ message: 'Decks not found' }); }
         res.status(200).send(decks);
       });
