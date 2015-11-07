@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var cardSchema = new mongoose.Schema({
   name: String,
   types: [ String ],
+  subtypes: [ String ],
   colors: [ String ],
   cost: String,
   text: String,
