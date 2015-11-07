@@ -21,7 +21,7 @@ router.route('/cards')
   .post(function (req, res ) {
     Card.find({multiverse_id: req.body.multiverse_id}, function (err, card ) {
       console.log('card',card);
-      // if(card) return res.status(409).send({message: 'Sorry, card already exists!'});
+      if(card) return res.status(409).send({message: 'Sorry, card already exists!'});
 
       var newCard = new Card({
         name: req.body.name,
