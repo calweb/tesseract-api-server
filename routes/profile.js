@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
 var Deck = require('../models/Deck');
-var config = require('../config');
 var ensureAuthenticated = require('./helpers').ensureAuthenticated;
 var role = require('./roles');
 
@@ -61,7 +60,7 @@ router.route('/admin/users/:userId')
       });
     });
   })
-  .delete(function (req, res) {
+  .delete(function (req, res, next) {
     User.findByIdAndRemove(req.params.userId, function (err, user) {
       if(err) { return next(err); }
       res.status(200).send({message: 'Successfuly Deleted User'});
