@@ -19,9 +19,9 @@ router.route('/cards')
     });
   })
   .post(function (req, res ) {
-    Card.findById(req.body._id, function (err, card ) {
+    Card.find({multiverse_id: req.body.multiverse_id}, function (err, card ) {
       if(card) return res.status(409).send({message: 'Sorry, card already exists!'});
-
+  
       var newCard = new Card({
         name: req.body.name,
         types: req.body.types,
