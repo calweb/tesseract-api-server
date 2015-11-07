@@ -4,7 +4,7 @@ var ensureAuthenticated = require('./helpers').ensureAuthenticated;
 var role = require('./roles');
 var Card = require('../models/Card');
 
-route.param('cardId', function (req, res, next, cardId) {
+router.param('cardId', function (req, res, next, cardId) {
   next();
 });
 
@@ -28,7 +28,7 @@ router.route('/cards')
         colors: req.body.colors,
         cost: req.body.cost,
         text: req.body.text,
-        set: req.body.set,
+        cardSet: req.body.set,
         rarity: req.body.rarity,
         multiverse_id: req.body.multiverse_id,
         flavor: req.body.flavor,

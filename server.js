@@ -9,6 +9,7 @@ var User = require('./models/User');
 var authRoutes = require('./routes/auth');
 var profileRoutes = require('./routes/profile');
 var uploadRoutes = require('./routes/upload');
+var cardRoutes = require('./routes/card');
 var role = require('./routes/roles');
 
 mongoose.connect(config.MONGO_URI);
@@ -40,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'app')));
 app.use('/auth', authRoutes);
 app.use('/api', profileRoutes);
 app.use('/api/uploads', uploadRoutes);
+app.use('/api', cardRoutes);
 
 
 app.listen(app.get('port'), function() {

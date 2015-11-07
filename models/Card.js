@@ -6,7 +6,7 @@ var cardSchema = new mongoose.Schema({
   colors: [ String ],
   cost: String,
   text: String,
-  set: String,
+  cardSet: String,
   rarity: String,
   multiverse_id: Number,
   flavor: String,
