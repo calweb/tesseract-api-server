@@ -10,7 +10,7 @@ router.param('cardId', function (req, res, next, cardId) {
 
 // api/cards
 router.route('/cards')
-  .all(ensureAuthenticated, role.can('access player resources'))
+  // .all(ensureAuthenticated, role.can('access player resources'))
   .get(function (req, res, next) {
     Card.find({}, function (err, cards ) {
       if(err) return next(err);
@@ -37,7 +37,7 @@ router.route('/cards')
         image_url: req.body.image_url
       });
       newCard.save(function (err) {
-        res.status(200).send(newCard);
+        res.status(200).send();
       });
     });
   });
