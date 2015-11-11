@@ -4,7 +4,11 @@ var deckSchema = new mongoose.Schema({
   name: String,
   user: {type: mongoose.Schema.ObjectId, ref: 'User'},
   cards: [
-    { type: mongoose.Schema.ObjectId, ref: 'Card'}
+    {
+      card: { type: mongoose.Schema.ObjectId, ref: 'Card'},
+      qty: Number
+    }
+
   ],
   description: String,
   isPublic: Boolean,
