@@ -9,13 +9,13 @@ var role = require('./roles');
 router.route('/me')
   .all(ensureAuthenticated)
   .get(function(req, res) {
-    User.findById(req.user, function(err, user) {
+    User.findById(req.user).populate('profile.decks').exec(function(err, user) {
       res.send(user);
     });
   })
 // PUT /api/me
   .put(function(req, res) {
-    User.findById(req.user, function(err, user) {
+    User.findById(req.user).populate('profile.decks').exec(function(err, user) {
       if (!user) {
         return res.status(400).send({ message: 'User not found' });
       }
@@ -66,58 +66,5 @@ router.route('/admin/users/:userId')
       res.status(200).send({message: 'Successfuly Deleted User'});
     });
   });
-
-  // deckbuilding
-  router.param('deckId', function (req, res, next, deckId) {
-    next();
-  });
-
-  router.route('/me/decks')
-    .all(ensureAuthenticated, role.can('access player resources'))
-    .get(function (req, res) {
-      Deck.find({user: req.user }, function (err, decks) {
-        if (err) { return res.status(400).send({ message: 'Decks not found' }); }
-        res.status(200).send(decks);
-      });
-    })
-    .post(function (req, res) {
-      var deck = new Deck({
-        name: req.body.name,
-        user: req.user,
-        cards: req.body.cards,
-        description: req.body.description,
-        isPublic: req.body.isPublic || false
-      });
-
-      deck.save(function () {
-        res.send(deck);
-      });
-
-    });
-
-  router.route('/me/decks/:deckId')
-    .all(ensureAuthenticated, role.can('access player resources'))
-    .get(function (req, res ) {
-      Deck.findById(req.params.deckId, function (err, deck ) {
-        if(err) return res.status(400).send(err);
-        res.status(200).send(deck);
-      });
-    })
-    .put(function (req, res ) {
-      Deck.findById(req.params.deckId, function (err, deck ) {
-        if(err) return res.status(400).send(err);
-        if(!deck) return res.status(404).send({message: 'Deck not found!'});
-        deck.name = req.body.name || deck.name;
-        deck.user = req.body.user || deck.user;
-        deck.cards = req.body.cards || deck.cards;
-        deck.description = req.body.description || deck.description;
-        deck.isPublic = req.body.isPublic || deck.isPublic;
-
-        deck.save(function () {
-          res.status(200).end();
-        });
-
-      });
-    });
 
 module.exports = router;

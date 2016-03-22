@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
   google: String,
   github: String,
   profile: {
-    decks: {type: mongoose.Schema.ObjectId, ref: 'Deck'}
+    decks: [{type: mongoose.Schema.ObjectId, ref: 'Deck'}]
   }
 });
 

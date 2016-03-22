@@ -8,7 +8,6 @@ var deckSchema = new mongoose.Schema({
       card: { type: mongoose.Schema.ObjectId, ref: 'Card'},
       qty: Number
     }
-
   ],
   description: String,
   isPublic: Boolean,
